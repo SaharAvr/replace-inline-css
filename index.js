@@ -66,10 +66,10 @@ const replaceInlineCss = ({inputHtmlPath, outputHtmlPath, spacing = defaultOptio
     const finalSpacing = (spacing || defaultOptions.SPACING);
 
     const elementsWithInlineCss = [...document.querySelectorAll('[style]')].filter(({style}) => style.cssText);
-    const cssClasses = replaceStylesWithClasses({elementsWithInlineCss, spacing: finalSpacing})
+    const cssClasses = replaceStylesWithClasses({elementsWithInlineCss, spacing: finalSpacing});
     const combinedCssText = createCombinedCssText({cssClasses, spacing: finalSpacing});
-    appendStyle({document, cssText: combinedCssText, spacing: finalSpacing})
-
+    
+    appendStyle({document, cssText: combinedCssText, spacing: finalSpacing});
     fs.writeFileSync(outputHtmlPath, document.documentElement.outerHTML, 'utf-8');
 
 };

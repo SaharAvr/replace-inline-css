@@ -1,0 +1,28 @@
+{
+  "name": "replace-inline-css",
+  "version": "1.0.1",
+  "description": "This library allows you to replace all inline-css (<div style=\"...\">) of a given html file with a single css class",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "10.0.0",
+    "jsdom": "16.6.0",
+    "object-hash": "2.2.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "inline css",
+    "replace inline css",
+    "replace-inline-css",
+    "remove style",
+    "refactor style",
+    "refactor css",
+    "refactor html",
+    "remove html style"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaharAvr/replace-inline-css.git"
+  },
+  "homepage": "https://github.com/SaharAvr/replace-inline-css.git#readme"
+}

@@ -11,9 +11,9 @@ const defaultOptions: BaseOptions = {
     spacing: Spacing.FOUR_SPACES,
 };
 
-const replaceStylesWithClasses = (elementsWithInlineCss: HTMLElement[], options: BaseOptions = {spacing: defaultOptions.spacing}): CssClasses => (
+const replaceStylesWithClasses = (elementsWithInlineCss: HTMLElement[], options: BaseOptions = defaultOptions): CssClasses => (
     
-    elementsWithInlineCss.reduce((res: CssClasses, el: HTMLElement) => {
+    elementsWithInlineCss.reduce((res: CssClasses, el: HTMLElement): CssClasses => {
 
         const {cssText}: {cssText: string} = el.style;
         const formattedCssText: string = cssText
@@ -40,7 +40,7 @@ const replaceStylesWithClasses = (elementsWithInlineCss: HTMLElement[], options:
 
 );
 
-const createCombinedCssText = (cssClasses: CssClasses, options: BaseOptions = {spacing: defaultOptions.spacing}): string => (
+const createCombinedCssText = (cssClasses: CssClasses, options: BaseOptions = defaultOptions): string => (
 
     Object.keys(cssClasses).reduce((res: string, className: string) => {
         return `${res}\n${options.spacing}.${className} {\n${cssClasses[className].split('\n').map((line: string): string =>
@@ -49,7 +49,7 @@ const createCombinedCssText = (cssClasses: CssClasses, options: BaseOptions = {s
 
 );
 
-const appendStyle = (document: Document, cssText: string, options: BaseOptions = {spacing: defaultOptions.spacing}): void => {
+const appendStyle = (document: Document, cssText: string, options: BaseOptions = defaultOptions): void => {
     
     const style: HTMLStyleElement = document.createElement('style');
     style.innerHTML = `\n\n${options.spacing}${cssText.trim()}\n\n`;
@@ -58,23 +58,23 @@ const appendStyle = (document: Document, cssText: string, options: BaseOptions =
 };
 
 
-const replaceInlineCssBase = (html: string, options: BaseOptions = {spacing: Spacing.FOUR_SPACES}): string => {
+const replaceInlineCssBase = (html: string, options: BaseOptions = defaultOptions): string => {
 
     const htmlCopy = html;
     const {window: {document}}: {window: {document: Document}} = new JSDOM(htmlCopy);
-    const finalSpacing = (options.spacing || defaultOptions.spacing);
+    const mergedOptions: BaseOptions = {...(options || {}), ...defaultOptions};
 
     const elementsWithInlineCss: HTMLElement[] = [...document.querySelectorAll<HTMLElement>('[style]')].filter((el: HTMLElement): string => el.style.cssText);
-    const cssClasses: CssClasses = replaceStylesWithClasses(elementsWithInlineCss, {spacing: finalSpacing});
-    const combinedCssText: string = createCombinedCssText(cssClasses, {spacing: finalSpacing});
+    const cssClasses: CssClasses = replaceStylesWithClasses(elementsWithInlineCss, mergedOptions);
+    const combinedCssText: string = createCombinedCssText(cssClasses, mergedOptions);
     
-    appendStyle(document, combinedCssText, {spacing: finalSpacing});
+    appendStyle(document, combinedCssText, options);
 
     return document.documentElement.outerHTML;
 
 };
 
-const replaceInlineCssIO = (inputHtmlPath: string, outputHtmlPath: string, options: BaseOptions = {spacing: Spacing.FOUR_SPACES}): void => {
+const replaceInlineCssIO = (inputHtmlPath: string, outputHtmlPath: string, options: BaseOptions = defaultOptions): void => {
 
     const inputHtmlPathExists = fs.pathExistsSync(inputHtmlPath);
     
@@ -86,8 +86,9 @@ const replaceInlineCssIO = (inputHtmlPath: string, outputHtmlPath: string, optio
         return;
     }
 
+    const mergedOptions: BaseOptions = {...(options || {}), ...defaultOptions};
     const inputHtml: string = fs.readFileSync(inputHtmlPath, 'utf-8');
-    const outputHtml: string = replaceInlineCssBase(inputHtml, {spacing: (options.spacing || defaultOptions.spacing)});
+    const outputHtml: string = replaceInlineCssBase(inputHtml, mergedOptions);
 
     fs.writeFileSync(outputHtmlPath, outputHtml, 'utf-8');
 

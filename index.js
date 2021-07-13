@@ -2,14 +2,14 @@ const fs = require('fs-extra');
 const hash = require('object-hash');
 const {JSDOM} = require('jsdom');
 
-const spacingType = {
+const spacingTypes = {
     NONE: '',
     TWO_SPACES: '  ',
     FOUR_SPACES: '    ',
 };
 
 const defaultOptions = {
-    SPACING: spacingType.FOUR_SPACES
+    SPACING: spacingTypes.FOUR_SPACES
 };
 
 const replaceStylesWithClasses = ({elementsWithInlineCss, spacing = defaultOptions.SPACING}) => (

@@ -1,26 +1,43 @@
 declare module replaceInlineCss {
     /**
-     * Options for replace-inline-css
+     * Base options for replace-inline-css
      */
-    export interface Options {
+    export interface BaseOptions {
         /**
          * Spacing before each newline of the output class
          */
         spacing?: Spacing;
     }
     /**
-     * Options for replaceInlineCss
+     * Args type for replaceInlineCssIO
      */
-    export interface OptionsIO extends Options {
+    export type ReplaceInlineCssIoAgs = [
         /**
          * Path to the input html file
          */
-        inputHtmlPath: string;
+        inputHtmlPath: string,
         /**
          * Desired path to the output html file
          */
-        outputHtmlPath: string;
-    }
+        outputHtmlPath: string,
+        /**
+         * Base options
+         */
+        options?: BaseOptions,
+    ]
+    /**
+     * Args type for replaceInlineCssBase
+     */
+     export type ReplaceInlineCssBaseAgs = [
+        /**
+         * Html string to work on
+         */
+        html: string,
+        /**
+         * Base options
+         */
+        options?: BaseOptions,
+    ]
     /**
      * Spacing types
      */
@@ -54,7 +71,7 @@ declare module replaceInlineCss {
  * @param options An options object containing the input html path, the desired output html path,
  * and an optional spacing type.
  */
-declare function replaceInlineCss(options: replaceInlineCss.OptionsIO): void;
+declare function replaceInlineCss(...args: replaceInlineCss.ReplaceInlineCssIoAgs): void;
 
 /**
  * Replace inline css of html string.
@@ -62,6 +79,6 @@ declare function replaceInlineCss(options: replaceInlineCss.OptionsIO): void;
  * @param options An options object containing an optional spacing type.
  * @returns An html string of the output html, without inline css.
  */
-declare function replaceInlineCss(html: string, options: replaceInlineCss.Options): string;
+declare function replaceInlineCss(...args: replaceInlineCss.ReplaceInlineCssBaseAgs): string;
 
 export = replaceInlineCss;

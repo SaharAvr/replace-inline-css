@@ -1,6 +1,6 @@
 {
   "name": "replace-inline-css",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This library allows you to replace all inline-css (<div style=\"...\">) of a given html file with a single css class",
   "main": "index.js",
   "license": "MIT",

@@ -20,7 +20,7 @@ $ yarn add replace-inline-css
 ```
 `npm`:
 ```sh
-$ npm install replace-inline-css
+$ npm i replace-inline-css
 ```
 
 ## Usage

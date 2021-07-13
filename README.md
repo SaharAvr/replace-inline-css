@@ -11,7 +11,7 @@ This library allows you to replace all inline-css (`<div style="...">`) of a giv
 
 ## Installation
 
-inline-css-replacer requires [Node.js](https://nodejs.org/) v10+ to run.
+replace-inline-css requires [Node.js](https://nodejs.org/) v10+ to run.
 
 `yarn`:
 

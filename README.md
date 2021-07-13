@@ -29,10 +29,11 @@ Simply `require` the module and use it as a function.
 ```js
 const replaceInlineCss = require('replace-inline-css');
 
-replaceInlineCss({
-    inputHtmlPath: './input.html',
-    outputHtmlPath: './output.html',
-});
+replaceInlineCss('./input.html', './output.html');
+
+// Alternativley, you can pass an html string and play with the result
+
+const newHtml = replaceInlineCss(html);
 ```
 
 ##### input.html:

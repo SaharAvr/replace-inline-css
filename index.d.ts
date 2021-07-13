@@ -68,8 +68,9 @@ declare module replaceInlineCss {
 
 /**
  * Replace inline css of html file (IO action).
- * @param options An options object containing the input html path, the desired output html path,
- * and an optional spacing type.
+ * @param inputHtmlPath Path to the input html file.
+ * @param outputHtmlPath Desired path to the output html file.
+ * @param options An options object containing an optional spacing type.
  */
 declare function replaceInlineCss(...args: replaceInlineCss.ReplaceInlineCssIoAgs): void;
 
